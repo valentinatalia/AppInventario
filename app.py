@@ -26,10 +26,21 @@ if codigo_qr:
     equipo_qr = df[df["codigo"].astype(str) == str(codigo_qr)]
 
     if not equipo_qr.empty:
-        st.title("📄 Ficha del Equipo (QR)")
-        st.dataframe(equipo_qr, use_container_width=True)
+        equipo = equipo_qr.iloc[0]
 
-        st.stop()
+        st.title(f"📄 {equipo['nombre']}")
+
+        st.write(f"**Código:** {equipo['codigo']}")
+        st.write(f"**Área:** {equipo['area']}")
+        st.write(f"**Marca:** {equipo['marca']}")
+        st.write(f"**Modelo:** {equipo['modelo']}")
+        st.write(f"**Serie:** {equipo['no. serie']}")
+        st.write(f"**Estado:** {equipo['estado del equipo']}")
+
+    else:
+        st.error("Equipo no encontrado")
+
+    st.stop()
 
 #   2.1. Limpieza de las columnas para evitar errores ortograficos: 
 def limpiar(texto):
