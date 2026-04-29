@@ -16,6 +16,21 @@ st.markdown("<h1 style='text-align: center;'> Sistema de Inventario Médico </h1
 #   2. Cargar la base de datos: 
 df = pd.read_csv("INVENTARIO.csv")
 
+query = st.query_params
+
+query = st.query_params
+
+codigo_qr = query.get("codigo")
+
+if codigo_qr:
+    equipo_qr = df[df["codigo"].astype(str) == str(codigo_qr)]
+
+    if not equipo_qr.empty:
+        st.title("📄 Ficha del Equipo (QR)")
+        st.dataframe(equipo_qr, use_container_width=True)
+
+        st.stop()
+
 #   2.1. Limpieza de las columnas para evitar errores ortograficos: 
 def limpiar(texto):
     texto = texto.strip().lower()
