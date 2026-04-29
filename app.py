@@ -30,12 +30,21 @@ if codigo_qr:
 
         st.title(f"📄 {equipo['nombre']}")
 
-        st.write(f"**Código:** {equipo['codigo']}")
-        st.write(f"**Área:** {equipo['area']}")
-        st.write(f"**Marca:** {equipo['marca']}")
-        st.write(f"**Modelo:** {equipo['modelo']}")
-        st.write(f"**Serie:** {equipo['no. serie']}")
-        st.write(f"**Estado:** {equipo['estado del equipo']}")
+        st.subheader("Información del equipo")
+
+        st.write(f"**Código:** {equipo.get('codigo', '')}")
+        st.write(f"**Área:** {equipo.get('area', '')}")
+        st.write(f"**Nombre:** {equipo.get('nombre', '')}")
+        st.write(f"**Marca:** {equipo.get('marca', '')}")
+        st.write(f"**Modelo:** {equipo.get('modelo', '')}")
+        st.write(f"**No. Serie:** {equipo.get('no. serie', '')}")
+        st.write(f"**Ubicación:** {equipo.get('ubicacion', '')}")
+        st.write(f"**Adquisición:** {equipo.get('adquisicion', '')}")
+        st.write(f"**Año:** {equipo.get('ano', '')}")
+        st.write(f"**Garantía:** {equipo.get('garantia', '')}")
+        st.write(f"**Estado del equipo:** {equipo.get('estado del equipo', '')}")
+        st.write(f"**Batería:** {equipo.get('bateria', '')}")
+        st.write(f"**Accesorios:** {equipo.get('accesorios', '')}")
 
     else:
         st.error("Equipo no encontrado")
