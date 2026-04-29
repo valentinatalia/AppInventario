@@ -14,8 +14,7 @@ st.markdown("<h1 style='text-align: center;'> Sistema de Inventario Médico </h1
 
 
 #   2. Cargar la base de datos: 
-ruta = "C:/Users/natva/Downloads/INVENTARIO.csv"
-df = pd.read_csv(ruta)
+df = pd.read_csv("INVENTARIO.csv")
 
 #   2.1. Limpieza de las columnas para evitar errores ortograficos: 
 def limpiar(texto):
@@ -88,7 +87,7 @@ elif opcion == "🏥 Filtrar por Área":
 elif opcion == "🗂 Mantenimientos Realizados":
     st.subheader("🗂 Historial de Mantenimientos")
 
-    ruta_mant = r"C:\Users\natva\Downloads\MANTENIMIENTOS.csv"
+    ruta_mant = "MANTENIMIENTOS.csv"
 
     if os.path.exists(ruta_mant): 
         df_mant = pd.read_csv(ruta_mant)
@@ -152,7 +151,7 @@ elif opcion == "➕ Agregar Nuevo Equipo":
         nuevo.columns = [limpiar(col) for col in nuevo.columns]
 
         df = pd.concat([df, nuevo], ignore_index=True)
-        df.to_csv(ruta, index=False, encoding="utf-8-sig")
+        df.to_csv("INVENTARIO.csv", index=False, encoding="utf-8-sig")
 
         st.success("¡Equipo agregado correctamente!")
         
@@ -161,7 +160,7 @@ elif opcion == "➕ Agregar Nuevo Equipo":
 elif opcion == "🔧 Registrar Mantenimiento":
     st.subheader("Registro de mantenimiento")
 
-    ruta_mant = r"C:\Users\natva\Downloads\MANTENIMIENTOS.csv"
+    ruta_mant = "MANTENIMIENTOS.csv"
 
     control = st.text_input("Control:")
     fecha = st.text_input("Fecha (aaaa/mm/dd):")
@@ -175,7 +174,7 @@ elif opcion == "🔧 Registrar Mantenimiento":
     if st.button("Guardar mantenimiento"):
 
         if not control.strip() or not descripcion.strip() or not actividad.strip():
-            st.error("⚠️ Completa los campos obligatorios")
+            st.error("¡Completa los campos obligatorios!")
 
         else:
             nuevo_mant = pd.DataFrame([{
