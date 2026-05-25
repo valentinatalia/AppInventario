@@ -8,9 +8,72 @@ import os
 
 #   1. Configuración
 st.set_page_config(page_title="Inventario Médico", layout="wide")
+st.markdown("""
+<style>
+
+/* Fondo general */
+.main {
+    background-color: #f5f7fa;
+}
+
+/* Sidebar */
+section[data-testid="stSidebar"] {
+    background-color: #0f172a;
+}
+
+/* Texto sidebar */
+section[data-testid="stSidebar"] * {
+    color: white;
+}
+
+/* Tarjetas */
+.card {
+    background-color: white;
+    padding: 20px;
+    border-radius: 15px;
+    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
+    margin-bottom: 15px;
+}
+
+/* Botones */
+.stButton>button {
+    background-color: #2563eb;
+    color: white;
+    border-radius: 10px;
+    border: none;
+    padding: 10px 20px;
+    font-weight: bold;
+}
+
+/* Inputs */
+.stTextInput input, .stTextArea textarea {
+    border-radius: 10px;
+}
+
+/* Selectbox */
+.stSelectbox div[data-baseweb="select"] {
+    border-radius: 10px;
+}
+
+/* Títulos */
+h1, h2, h3 {
+    color: #0f172a;
+}
+
+</style>
+""", unsafe_allow_html=True)
 
 # 1.1 Titulo de la interfaz: 
-st.markdown("<h1 style='text-align: center;'> Sistema de Inventario Médico </h1>", unsafe_allow_html=True)
+st.markdown("""
+<h1 style='text-align: center; color:#2563eb;'>
+🏥 Sistema Inteligente de Inventario Médico
+</h1>
+<p style='text-align:center; color:gray;'>
+Gestión • Mantenimiento • Trazabilidad • QR
+</p>
+<hr>
+""", unsafe_allow_html=True)
+
 
 
 #   2. Cargar la base de datos: 
@@ -59,7 +122,7 @@ def limpiar(texto):
 
 df.columns = [limpiar(col) for col in df.columns]
 
-# 🔥 eliminar columnas duplicadas (clave)
+#   2.2 Eliminar columnas duplicadas: 
 df = df.loc[:, ~df.columns.duplicated()]
 
 
