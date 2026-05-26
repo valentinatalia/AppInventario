@@ -137,6 +137,9 @@ opcion = st.sidebar.selectbox(
         "🗂 Mantenimientos Realizados",
         "➕ Agregar Nuevo Equipo",
         "🔧 Registrar Mantenimiento",
+        "📸 Identificación de Equipos",
+        "📱 QR por Equipo",
+        "🗑 Dar de Baja Equipo",
         "Salir"
     ]
 )
@@ -341,6 +344,124 @@ elif opcion == "🔧 Registrar Mantenimiento":
 
             st.rerun()
 
+
+# 4.7 Identificación visual de equipos
+elif opcion == "📸 Identificación de Equipos":
+
+    st.subheader("📸 Identificación Visual de Equipos")
+
+    equipo_select = st.selectbox(
+        "Selecciona un equipo:",
+        df["codigo"]
+    )
+
+    datos = df[df["codigo"] == equipo_select].iloc[0]
+
+    ruta_img = f"imagenes/{equipo_select}.jpg"
+
+    col1, col2 = st.columns([1,2])
+
+    with col1:
+
+        if os.path.exists(ruta_img):
+            st.image(ruta_img, use_container_width=True)
+        else:
+            st.warning("No hay imagen disponible")
+
+    with col2:
+
+        st.markdown(f"""
+        <div class="card">
+
+        <h2>{datos['nombre']}</h2>
+
+        <b>Código:</b> {datos['codigo']} <br>
+        <b>Área:</b> {datos['area']} <br>
+        <b>Marca:</b> {datos['marca']} <br>
+        <b>Modelo:</b> {datos['modelo']} <br>
+        <b>Estado:</b> {datos['estado del equipo']}
+
+        </div>
+        """, unsafe_allow_html=True)
+
+
+# 4.8 QR por equipo
+elif opcion == "📱 QR por Equipo":
+
+    st.subheader("📱 QR de Equipos")
+
+    equipo_select = st.selectbox(
+        "Selecciona un equipo:",
+        df["codigo"]
+    )
+
+    ruta_qr = f"qr/{equipo_select}.png"
+
+    datos = df[df["codigo"] == equipo_select].iloc[0]
+
+    col1, col2 = st.columns([1,2])
+
+    with col1:
+
+        if os.path.exists(ruta_qr):
+            st.image(ruta_qr, width=300)
+        else:
+            st.warning("QR no encontrado")
+
+    with col2:
+
+        st.markdown(f"""
+        <div class="card">
+
+        <h2>{datos['nombre']}</h2>
+
+        <b>Código:</b> {datos['codigo']} <br>
+        <b>Área:</b> {datos['area']} <br>
+        <b>Marca:</b> {datos['marca']} <br>
+        <b>Modelo:</b> {datos['modelo']}
+
+        </div>
+        """, unsafe_allow_html=True)
+
+
+# 4.9 Dar de baja equipo
+elif opcion == "🗑 Dar de Baja Equipo":
+
+    st.subheader("🗑 Dar de Baja Equipo")
+
+    equipo_select = st.selectbox(
+        "Selecciona el equipo:",
+        df["codigo"]
+    )
+
+    datos = df[df["codigo"] == equipo_select].iloc[0]
+
+    st.markdown(f"""
+    <div class="card">
+
+    <h2>{datos['nombre']}</h2>
+
+    <b>Código:</b> {datos['codigo']} <br>
+    <b>Área:</b> {datos['area']} <br>
+    <b>Estado actual:</b> {datos['estado del equipo']}
+
+    </div>
+    """, unsafe_allow_html=True)
+
+    motivo = st.text_area("Motivo de baja:")
+
+    if st.button("Dar de baja"):
+
+        df.loc[
+            df["codigo"] == equipo_select,
+            "estado del equipo"
+        ] = "Baja definitiva"
+
+        df.to_csv("INVENTARIO.csv", index=False, encoding="utf-8-sig")
+
+        st.success("✅ Equipo dado de baja correctamente")
+
+        st.rerun()
 
 
 # 4.7 Opción : Salida del sistema: 
