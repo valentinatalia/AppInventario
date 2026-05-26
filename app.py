@@ -271,7 +271,20 @@ opcion = st.sidebar.selectbox(
 #   4. Despliegue de interfaz: 
 if opcion == "Inicio":
 
-    st.markdown("## ¡Bienvenido al sistema! (Despliega el Menú a tu izquierda)")
+    st.markdown("""
+    <h1 style='margin-bottom:0px;'>
+    ¡Bienvenido al sistema!
+    </h1>
+
+    <p style='
+    color:#94a3b8;
+    font-size:18px;
+    margin-top:5px;
+    margin-bottom:30px;
+    '>
+    Despliega el menú lateral izquierdo para acceder a las funciones del sistema.
+    </p>
+    """, unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
