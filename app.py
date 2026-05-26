@@ -12,54 +12,166 @@ st.set_page_config(page_title="Inventario Médico", layout="wide")
 st.markdown("""
 <style>
 
-/* Fondo general */
-.main {
-    background-color: #f5f7fa;
+/* ===== FONDO GENERAL ===== */
+.stApp {
+    background: linear-gradient(
+        135deg,
+        #0b1120 0%,
+        #111827 50%,
+        #0f172a 100%
+    );
+    color: white;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* Sidebar */
+/* ===== SIDEBAR ===== */
 section[data-testid="stSidebar"] {
-    background-color: #0f172a;
+    background: #111827;
+    border-right: 1px solid #1e293b;
 }
 
-/* Texto sidebar */
+/* ===== TEXTO SIDEBAR ===== */
 section[data-testid="stSidebar"] * {
     color: white;
 }
 
-/* Tarjetas */
-.card {
-    background-color: white;
-    color: #0f172a;
-    padding: 20px;
-    border-radius: 15px;
-    box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
-    margin-bottom: 15px;
-}
-
-/* Botones */
-.stButton>button {
-    background-color: #2563eb;
-    color: white;
-    border-radius: 10px;
-    border: none;
-    padding: 10px 20px;
-    font-weight: bold;
-}
-
-/* Inputs */
-.stTextInput input, .stTextArea textarea {
-    border-radius: 10px;
-}
-
-/* Selectbox */
-.stSelectbox div[data-baseweb="select"] {
-    border-radius: 10px;
-}
-
-/* Títulos */
+/* ===== TITULOS ===== */
 h1, h2, h3 {
+    color: white;
+    font-weight: 700;
+}
+
+/* ===== SUBTÍTULOS ===== */
+p {
+    color: #cbd5e1;
+}
+
+/* ===== INPUTS ===== */
+.stTextInput input,
+.stTextArea textarea,
+.stNumberInput input {
+    background-color: #1e293b !important;
+    color: white !important;
+    border: 1px solid #334155 !important;
+    border-radius: 14px !important;
+    padding: 10px !important;
+}
+
+/* ===== SELECTBOX ===== */
+div[data-baseweb="select"] > div {
+    background-color: #1e293b !important;
+    border-radius: 14px !important;
+    border: 1px solid #334155 !important;
+    color: white !important;
+}
+
+/* ===== BOTONES ===== */
+.stButton > button {
+    width: 100%;
+    background: linear-gradient(
+        135deg,
+        #2563eb,
+        #3b82f6
+    );
+    color: white;
+    border: none;
+    border-radius: 14px;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: bold;
+    transition: 0.3s;
+    box-shadow: 0px 4px 15px rgba(37,99,235,0.4);
+}
+
+/* ===== HOVER BOTONES ===== */
+.stButton > button:hover {
+    transform: translateY(-2px);
+    background: linear-gradient(
+        135deg,
+        #1d4ed8,
+        #2563eb
+    );
+}
+
+/* ===== TARJETAS ===== */
+.card {
+    background: rgba(255,255,255,0.95);
     color: #0f172a;
+    padding: 30px;
+    border-radius: 22px;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
+    backdrop-filter: blur(10px);
+    border-left: 8px solid #2563eb;
+    margin-bottom: 20px;
+    transition: 0.3s;
+}
+
+/* ===== EFECTO HOVER ===== */
+.card:hover {
+    transform: translateY(-5px);
+}
+
+/* ===== DATAFRAMES ===== */
+[data-testid="stDataFrame"] {
+    border-radius: 18px;
+    overflow: hidden;
+    border: 1px solid #1e293b;
+}
+
+/* ===== ALERTAS ===== */
+.stAlert {
+    border-radius: 16px;
+}
+
+/* ===== MÉTRICAS ===== */
+[data-testid="metric-container"] {
+    background: rgba(255,255,255,0.06);
+    border: 1px solid rgba(255,255,255,0.08);
+    padding: 20px;
+    border-radius: 18px;
+    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+}
+
+/* ===== SCROLLBAR ===== */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #111827;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #2563eb;
+    border-radius: 10px;
+}
+
+/* ===== QR ===== */
+img {
+    border-radius: 18px;
+}
+
+/* ===== SEPARADORES ===== */
+hr {
+    border: none;
+    height: 1px;
+    background: #334155;
+}
+
+/* ===== ANIMACIÓN ===== */
+.block-container {
+    animation: fadeIn 0.5s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0px);
+    }
 }
 
 </style>
