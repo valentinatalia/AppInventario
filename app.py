@@ -271,43 +271,84 @@ query = st.query_params
 codigo_qr = query.get("codigo")
 
 if codigo_qr:
+
     equipo_qr = df[df["codigo"].astype(str) == str(codigo_qr)]
 
     if not equipo_qr.empty:
+
         equipo = equipo_qr.iloc[0]
-        
+
         # ===== BUSCAR IMAGEN =====
-ruta_img = None
+        ruta_img = None
 
-for ext in ["jpg", "jpeg", "png"]:
+        for ext in ["jpg", "jpeg", "png"]:
 
-    posible_ruta = f"imagenes/{codigo_qr}.{ext}"
+            posible_ruta = f"imagenes/{codigo_qr}.{ext}"
 
-    if os.path.exists(posible_ruta):
-        ruta_img = posible_ruta
-        break
+            if os.path.exists(posible_ruta):
+                ruta_img = posible_ruta
+                break
 
-        st.title(f"📄 {equipo['nombre']}")
+        # ===== INTERFAZ QR =====
+        st.markdown(f"""
+        <div class="card">
 
-        st.subheader("Información del equipo")
-        
-        # ===== MOSTRAR IMAGEN =====
-        if ruta_img: 
-            st.image(ruta_img, width=250)
+        <h1>📄 {equipo['nombre']}</h1>
 
-        st.write(f"**Código:** {equipo.get('codigo', '')}")
-        st.write(f"**Área:** {equipo.get('area', '')}")
-        st.write(f"**Nombre:** {equipo.get('nombre', '')}")
-        st.write(f"**Marca:** {equipo.get('marca', '')}")
-        st.write(f"**Modelo:** {equipo.get('modelo', '')}")
-        st.write(f"**No. Serie:** {equipo.get('no. serie', '')}")
-        st.write(f"**Ubicación:** {equipo.get('ubicacion', '')}")
-        st.write(f"**Adquisición:** {equipo.get('adquisicion', '')}")
-        st.write(f"**Año:** {equipo.get('ano', '')}")
-        st.write(f"**Garantía:** {equipo.get('garantia', '')}")
-        st.write(f"**Estado del equipo:** {equipo.get('estado del equipo', '')}")
-        st.write(f"**Batería:** {equipo.get('bateria', '')}")
-        st.write(f"**Accesorios:** {equipo.get('accesorios', '')}")
+        <p style="color:#94a3b8;font-size:18px;">
+        Información biomédica del equipo
+        </p>
+
+        </div>
+        """, unsafe_allow_html=True)
+
+        col1, col2 = st.columns([1,2])
+
+        with col1:
+
+            if ruta_img:
+                st.image(ruta_img, use_container_width=True)
+
+            else:
+                st.warning("Imagen no disponible")
+
+        with col2:
+
+            estado = equipo.get("estado del equipo", "")
+
+            if estado == "Operativo":
+                color_estado = "#22c55e"
+
+            elif estado == "Mantenimiento":
+                color_estado = "#facc15"
+
+            else:
+                color_estado = "#ef4444"
+
+            st.markdown(f"""
+            <div class="card">
+
+            <h2>{equipo.get('nombre','')}</h2>
+
+            <b>Código:</b> {equipo.get('codigo','')} <br>
+            <b>Área:</b> {equipo.get('area','')} <br>
+            <b>Marca:</b> {equipo.get('marca','')} <br>
+            <b>Modelo:</b> {equipo.get('modelo','')} <br>
+            <b>Serie:</b> {equipo.get('no. serie','')} <br>
+            <b>Ubicación:</b> {equipo.get('ubicacion','')} <br>
+
+            <p>
+            <b>Estado:</b>
+            <span style="
+            color:{color_estado};
+            font-weight:bold;
+            ">
+            ● {estado}
+            </span>
+            </p>
+
+            </div>
+            """, unsafe_allow_html=True)
 
     else:
         st.error("Equipo no encontrado")
