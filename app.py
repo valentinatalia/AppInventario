@@ -144,14 +144,50 @@ opcion = st.sidebar.selectbox(
 
 #   4. Despliegue de interfaz: 
 if opcion == "Inicio":
-    st.subheader("👋 ¡Bienvenido!")
-    st.write("Selecciona una opción en el menú lateral para comenzar.")
-    st.info("Sistema Desarrollado para la Gestión de Equipos Médicos.")
+
+    st.markdown("## 👋 Bienvenido al sistema")
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.metric("📋 Equipos registrados", len(df))
+
+    with col2:
+        st.metric("🏥 Áreas hospitalarias", df["area"].nunique())
+
+    with col3:
+        st.metric("🔧 Mantenimientos", 
+        len(pd.read_csv("MANTENIMIENTOS.csv")) if os.path.exists("MANTENIMIENTOS.csv") else 0)
+
+    st.markdown("---")
+
+    st.info("""
+Este sistema permite:
+- Gestión de inventario médico.
+- Registro de mantenimientos.
+- Consulta rápida mediante QR.
+- Acceso remoto desde dispositivos móviles.
+""")
     
 # 4.1 Opción 1: Ver inventario Completo: 
 elif opcion == "📋 Ver Inventario Completo":
     st.subheader("📋 Inventario completo")
-    st.dataframe(df, use_container_width=True)
+
+    for _, row in df.iterrows():
+
+        st.markdown(f"""
+        <div class="card">
+
+        <h3>🩺 {row['nombre']}</h3>
+
+        <b>Código:</b> {row['codigo']} <br>
+        <b>Área:</b> {row['area']} <br>
+        <b>Marca:</b> {row['marca']} <br>
+        <b>Modelo:</b> {row['modelo']} <br>
+        <b>Estado:</b> {row['estado del equipo']}
+
+        </div>
+        """, unsafe_allow_html=True)
 
 
 # 4.2 Opción 2: Buscar equipo mediante código establecido en la base de datos:
