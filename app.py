@@ -293,7 +293,7 @@ if codigo_qr:
         st.markdown(f"""
         <div class="card">
 
-        <h1>📄 {equipo['nombre']}</h1>
+        <h1> {equipo['nombre']}</h1>
 
         <p style="color:#94a3b8;font-size:18px;">
         Información biomédica del equipo
