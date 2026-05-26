@@ -172,22 +172,7 @@ Este sistema permite:
 # 4.1 Opción 1: Ver inventario Completo: 
 elif opcion == "📋 Ver Inventario Completo":
     st.subheader("📋 Inventario completo")
-
-    for _, row in df.iterrows():
-
-        st.markdown(f"""
-        <div class="card">
-
-        <h3>🩺 {row['nombre']}</h3>
-
-        <b>Código:</b> {row['codigo']} <br>
-        <b>Área:</b> {row['area']} <br>
-        <b>Marca:</b> {row['marca']} <br>
-        <b>Modelo:</b> {row['modelo']} <br>
-        <b>Estado:</b> {row['estado del equipo']}
-
-        </div>
-        """, unsafe_allow_html=True)
+    st.dataframe(df, use_container_width=True)
 
 
 # 4.2 Opción 2: Buscar equipo mediante código establecido en la base de datos:
