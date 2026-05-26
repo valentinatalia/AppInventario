@@ -165,6 +165,16 @@ img{
 </style>
 """, unsafe_allow_html=True)
 
+
+
+
+col_logo1, col_logo2 = st.columns([8,1])
+
+with col_logo2:
+    st.image("logo.png", width=90)
+
+
+
 # 1.1 Titulo de la interfaz: 
 st.markdown("""
 <div style="
@@ -187,7 +197,7 @@ font-size:55px;
 font-weight:800;
 color:white;
 ">
-🩺 VitaCore
+🩺 VitaCore OS
 </h1>
 
 <p style="
@@ -211,7 +221,7 @@ border-radius:14px;
 color:#cbd5e1;
 font-size:15px;
 ">
-📦 Inventario
+Inventario
 </div>
 
 <div style="
@@ -221,7 +231,7 @@ border-radius:14px;
 color:#cbd5e1;
 font-size:15px;
 ">
-🔧 Mantenimientos
+Mantenimientos
 </div>
 
 <div style="
@@ -231,7 +241,7 @@ border-radius:14px;
 color:#cbd5e1;
 font-size:15px;
 ">
-📱 QR Inteligente
+QR Inteligente
 </div>
 
 <div style="
@@ -241,7 +251,7 @@ border-radius:14px;
 color:#cbd5e1;
 font-size:15px;
 ">
-☁️ Cloud Access
+Cloud Access
 </div>
 
 </div>
@@ -472,10 +482,9 @@ elif opcion == "🗂 Mantenimientos Realizados":
 
         df_mant.columns = [limpiar(col) for col in df_mant.columns]
 
-        # 🔥 eliminar duplicadas
         df_mant = df_mant.loc[:, ~df_mant.columns.duplicated()]
 
-        # 🔥 eliminar basura
+       
         df_mant = df_mant.dropna(how="all")
 
         st.dataframe(df_mant, use_container_width=True)
@@ -786,6 +795,23 @@ elif opcion == "🗑 Dar de Baja Equipo":
         st.success("✅ Equipo dado de baja correctamente")
 
         st.rerun()
+
+
+st.markdown("""
+<hr>
+
+<div style="
+text-align:center;
+padding:20px;
+color:#64748b;
+font-size:14px;
+">
+
+VitaCore • Plataforma Biomédica Inteligente  
+Cloud Edition • 2026
+
+</div>
+""", unsafe_allow_html=True)
 
 
 # 4.7 Opción : Salida del sistema: 
