@@ -29,6 +29,7 @@ section[data-testid="stSidebar"] * {
 /* Tarjetas */
 .card {
     background-color: white;
+    color: #0f172a;
     padding: 20px;
     border-radius: 15px;
     box-shadow: 0px 4px 12px rgba(0,0,0,0.1);
