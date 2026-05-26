@@ -2,6 +2,7 @@ import streamlit as st
 import pandas as pd
 import unicodedata
 import os
+import io
 
 #ESTE ES EL BUENO!!!
 
@@ -402,12 +403,25 @@ elif opcion == "📱 QR por Equipo":
 
     col1, col2 = st.columns([1,2])
 
-    with col1:
+with col1:
 
-        if os.path.exists(ruta_qr):
-            st.image(ruta_qr, width=300)
-        else:
-            st.warning("QR no encontrado")
+    if os.path.exists(ruta_qr):
+
+        st.image(ruta_qr, width=300)
+
+        buffer = io.BytesIO()
+
+        qr.save(buffer, format="PNG")
+
+        st.download_button(
+            label="📥 Descargar QR",
+            data=buffer.getvalue(),
+            file_name=f"{equipo_select}_QR.png",
+            mime="image/png"
+        )
+
+    else:
+        st.warning("QR no encontrado")
 
     with col2:
 
