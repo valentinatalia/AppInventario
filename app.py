@@ -704,34 +704,46 @@ elif opcion == "📱 QR por Equipo":
 
     col1, col2 = st.columns([1,2])
 
-    with col1:
+with col1:
 
-        if os.path.exists(ruta_qr):
+    if os.path.exists(ruta_qr):
 
-            st.image(ruta_qr, width=300)
+        st.image(ruta_qr, width=300)
 
-            st.markdown("### 📤 Subir nuevo QR")
+        with open(ruta_qr, "rb") as file:
 
-            modo_edicion = st.toggle("✏️ Editar QR")
+            st.download_button(
+                label="📥 Descargar QR",
+                data=file,
+                file_name=f"{equipo_select}_QR.png",
+                mime="image/png"
+            )
 
-            if modo_edicion:
+    else:
+        st.warning("QR no encontrado")
 
-                qr_manual = st.file_uploader(
-                    "Sube un QR manual",
-                    type=["png", "jpg", "jpeg"],
-                    key="qr_upload"
-                )
+    st.markdown("### 📤 Subir nuevo QR")
 
-                if qr_manual is not None:
+    modo_edicion = st.toggle("✏️ Editar QR")
 
-                    os.makedirs("qr", exist_ok=True)
+    if modo_edicion:
 
-                    with open(ruta_qr, "wb") as f:
-                        f.write(qr_manual.getbuffer())
+        qr_manual = st.file_uploader(
+            "Sube un QR manual",
+            type=["png", "jpg", "jpeg"],
+            key="qr_upload"
+        )
 
-                    st.success("✅ QR actualizado correctamente")
+        if qr_manual is not None:
 
-                    st.rerun()
+            os.makedirs("qr", exist_ok=True)
+
+            with open(ruta_qr, "wb") as f:
+                f.write(qr_manual.getbuffer())
+
+            st.success("✅ QR actualizado correctamente")
+
+            st.rerun()
 
             with open(ruta_qr, "rb") as file:
 
