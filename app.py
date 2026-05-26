@@ -359,7 +359,15 @@ elif opcion == "📸 Identificación de Equipos":
 
     datos = df[df["codigo"] == equipo_select].iloc[0]
 
-    ruta_img = f"imagenes/{equipo_select}.jpg"
+    ruta_img = None
+
+for ext in ["jpg", "jpeg", "png"]:
+
+    posible_ruta = f"imagenes/{equipo_select}.{ext}"
+
+    if os.path.exists(posible_ruta):
+        ruta_img = posible_ruta
+        break
 
     col1, col2 = st.columns([1,2])
 
@@ -387,7 +395,6 @@ elif opcion == "📸 Identificación de Equipos":
         """, unsafe_allow_html=True)
 
 
-# 4.8 QR por equipo
 # 4.8 QR por equipo
 elif opcion == "📱 QR por Equipo":
 
