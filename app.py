@@ -388,6 +388,7 @@ elif opcion == "📸 Identificación de Equipos":
 
 
 # 4.8 QR por equipo
+# 4.8 QR por equipo
 elif opcion == "📱 QR por Equipo":
 
     st.subheader("📱 QR de Equipos")
@@ -403,25 +404,23 @@ elif opcion == "📱 QR por Equipo":
 
     col1, col2 = st.columns([1,2])
 
-with col1:
+    with col1:
 
-    if os.path.exists(ruta_qr):
+        if os.path.exists(ruta_qr):
 
-        st.image(ruta_qr, width=300)
+            st.image(ruta_qr, width=300)
 
-        buffer = io.BytesIO()
+            with open(ruta_qr, "rb") as file:
 
-        qr.save(buffer, format="PNG")
+                st.download_button(
+                    label="📥 Descargar QR",
+                    data=file,
+                    file_name=f"{equipo_select}_QR.png",
+                    mime="image/png"
+                )
 
-        st.download_button(
-            label="📥 Descargar QR",
-            data=buffer.getvalue(),
-            file_name=f"{equipo_select}_QR.png",
-            mime="image/png"
-        )
-
-    else:
-        st.warning("QR no encontrado")
+        else:
+            st.warning("QR no encontrado")
 
     with col2:
 
