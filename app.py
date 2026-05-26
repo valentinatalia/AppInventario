@@ -275,10 +275,25 @@ if codigo_qr:
 
     if not equipo_qr.empty:
         equipo = equipo_qr.iloc[0]
+        
+        # ===== BUSCAR IMAGEN =====
+ruta_img = None
+
+for ext in ["jpg", "jpeg", "png"]:
+
+    posible_ruta = f"imagenes/{codigo_qr}.{ext}"
+
+    if os.path.exists(posible_ruta):
+        ruta_img = posible_ruta
+        break
 
         st.title(f"📄 {equipo['nombre']}")
 
         st.subheader("Información del equipo")
+        
+        # ===== MOSTRAR IMAGEN =====
+        if ruta_img: 
+            st.image(ruta_img, width=250)
 
         st.write(f"**Código:** {equipo.get('codigo', '')}")
         st.write(f"**Área:** {equipo.get('area', '')}")
