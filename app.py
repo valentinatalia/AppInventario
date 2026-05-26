@@ -189,7 +189,7 @@ hr {
 # 1.1 Titulo de la interfaz: 
 st.markdown("""
 <h1 style='text-align: center; color:#2563eb;'>
-🏥 Sistema Inteligente de Inventario Médico
+Sistema Inteligente de Inventario Médico
 </h1>
 <p style='text-align:center; color:gray;'>
 Gestión • Mantenimiento • Trazabilidad • QR
@@ -271,7 +271,7 @@ opcion = st.sidebar.selectbox(
 #   4. Despliegue de interfaz: 
 if opcion == "Inicio":
 
-    st.markdown("## 👋 Bienvenido al sistema")
+    st.markdown("## ¡Bienvenido al sistema! (Despliega el Menú a tu izquierda)")
 
     col1, col2, col3 = st.columns(3)
 
