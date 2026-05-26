@@ -252,7 +252,8 @@ elif opcion == "➕ Agregar Nuevo Equipo":
     garantia = st.text_input("Garantía:")
     estado = st.selectbox("Estado:", ["Operativo", "Mantenimiento", "Fuera de servicio"])
     bateria = st.text_input("Batería:")
-    accesorios = st.text_input("Accesorios:")
+    accesorios = st.text_input("Accesorios:") 
+    imagen = st.camera_input("📸 Tomar foto del equipo")
 
     if st.button("Guardar equipo"):
         nuevo = pd.DataFrame([{
@@ -275,8 +276,11 @@ elif opcion == "➕ Agregar Nuevo Equipo":
         nuevo.columns = [limpiar(col) for col in nuevo.columns]
 
         df = pd.concat([df, nuevo], ignore_index=True)
-        df.to_csv("INVENTARIO.csv", index=False, encoding="utf-8-sig")
-
+        df.to_csv("INVENTARIO.csv", index=False, encoding="utf-8-sig") 
+        if imagen is not None: 
+            os.makedirs("imagenes", exist_ok=True) 
+            with open(f"imagenes/{codigo}.jpg", "wb") as f: 
+                f.write(imagen.getbuffer())
         st.success("¡Equipo agregado correctamente!")
         
 
