@@ -512,9 +512,13 @@ elif opcion == "➕ Agregar Nuevo Equipo":
     ubicacion = st.text_input("Ubicación")
     adquisicion = st.text_input("Adquisición (Usa guiones (-) entre numeros (aaaa-mm-dd) ):")
     anio = st.number_input("Año:", min_value=2000, max_value=2100)
-    garantia = st.text_input("Garantía:")
+    garantia = st.selectbox(
+    "Garantía:",
+    ["Sí", "No"])
     estado = st.selectbox("Estado:", ["Operativo", "Mantenimiento", "Fuera de servicio"])
-    bateria = st.text_input("Batería:")
+    bateria = st.selectbox(
+    "Batería:",
+    ["Sí", "No"])
     accesorios = st.text_input("Accesorios:") 
     imagen = st.camera_input("📸 Tomar foto del equipo")
 
