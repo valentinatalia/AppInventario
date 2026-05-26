@@ -197,7 +197,7 @@ font-size:55px;
 font-weight:800;
 color:white;
 ">
-🩺 VitaCore OS
+🩺 VitaCore
 </h1>
 
 <p style="
