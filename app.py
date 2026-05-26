@@ -348,6 +348,7 @@ elif opcion == "🔧 Registrar Mantenimiento":
 
 
 # 4.7 Identificación visual de equipos
+# 4.7 Identificación visual de equipos
 elif opcion == "📸 Identificación de Equipos":
 
     st.subheader("📸 Identificación Visual de Equipos")
@@ -361,19 +362,19 @@ elif opcion == "📸 Identificación de Equipos":
 
     ruta_img = None
 
-for ext in ["jpg", "jpeg", "png"]:
+    for ext in ["jpg", "jpeg", "png"]:
 
-    posible_ruta = f"imagenes/{equipo_select}.{ext}"
+        posible_ruta = f"imagenes/{equipo_select}.{ext}"
 
-    if os.path.exists(posible_ruta):
-        ruta_img = posible_ruta
-        break
+        if os.path.exists(posible_ruta):
+            ruta_img = posible_ruta
+            break
 
     col1, col2 = st.columns([1,2])
 
     with col1:
 
-        if os.path.exists(ruta_img):
+        if ruta_img:
             st.image(ruta_img, use_container_width=True)
         else:
             st.warning("No hay imagen disponible")
@@ -413,7 +414,7 @@ elif opcion == "📱 QR por Equipo":
 
     with col1:
 
-        if os.path.exists(ruta_qr):
+        if ruta_img:
 
             st.image(ruta_qr, width=300)
 
