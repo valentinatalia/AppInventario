@@ -12,174 +12,153 @@ st.set_page_config(page_title="Inventario Médico", layout="wide")
 st.markdown("""
 <style>
 
-/* ===== FONDO GENERAL ===== */
-.stApp {
-    background: linear-gradient(
-        135deg,
-        #0b1120 0%,
-        #111827 50%,
-        #0f172a 100%
-    );
-    color: white;
-    font-family: 'Segoe UI', sans-serif;
+/* ===== APP ===== */
+.stApp{
+    background:
+    radial-gradient(circle at top left, #1e3a8a 0%, transparent 25%),
+    radial-gradient(circle at bottom right, #0f172a 0%, transparent 30%),
+    linear-gradient(135deg,#020617 0%,#0f172a 100%);
+    color:white;
+    font-family: 'Inter', sans-serif;
 }
 
 /* ===== SIDEBAR ===== */
-section[data-testid="stSidebar"] {
-    background: #111827;
-    border-right: 1px solid #1e293b;
+section[data-testid="stSidebar"]{
+    background: rgba(15,23,42,0.85);
+    backdrop-filter: blur(20px);
+    border-right:1px solid rgba(255,255,255,0.06);
 }
 
-/* ===== TEXTO SIDEBAR ===== */
-section[data-testid="stSidebar"] * {
-    color: white;
+/* ===== SIDEBAR TEXTO ===== */
+section[data-testid="stSidebar"] *{
+    color:white;
 }
 
 /* ===== TITULOS ===== */
-h1, h2, h3 {
-    color: white;
-    font-weight: 700;
-}
-
-/* ===== SUBTÍTULOS ===== */
-p {
-    color: #cbd5e1;
+h1,h2,h3{
+    color:white !important;
+    font-weight:700;
 }
 
 /* ===== INPUTS ===== */
 .stTextInput input,
 .stTextArea textarea,
-.stNumberInput input {
-    background-color: #1e293b !important;
-    color: white !important;
-    border: 1px solid #334155 !important;
-    border-radius: 14px !important;
-    padding: 10px !important;
+.stNumberInput input{
+    background: rgba(255,255,255,0.04)!important;
+    border:1px solid rgba(255,255,255,0.08)!important;
+    border-radius:18px!important;
+    color:white!important;
+    padding:12px!important;
 }
 
-/* ===== SELECTBOX ===== */
-div[data-baseweb="select"] > div {
-    background-color: #1e293b !important;
-    border-radius: 14px !important;
-    border: 1px solid #334155 !important;
-    color: white !important;
+/* ===== SELECT ===== */
+div[data-baseweb="select"] > div{
+    background: rgba(255,255,255,0.04)!important;
+    border-radius:18px!important;
+    border:1px solid rgba(255,255,255,0.08)!important;
 }
 
 /* ===== BOTONES ===== */
-.stButton > button {
-    width: 100%;
-    background: linear-gradient(
-        135deg,
-        #2563eb,
-        #3b82f6
-    );
-    color: white;
-    border: none;
-    border-radius: 14px;
-    padding: 14px;
-    font-size: 16px;
-    font-weight: bold;
-    transition: 0.3s;
-    box-shadow: 0px 4px 15px rgba(37,99,235,0.4);
+.stButton > button{
+    width:100%;
+    background:linear-gradient(135deg,#2563eb,#3b82f6);
+    border:none;
+    color:white;
+    border-radius:18px;
+    padding:14px;
+    font-size:16px;
+    font-weight:700;
+    transition:0.3s;
+    box-shadow:0px 8px 30px rgba(37,99,235,0.35);
 }
 
-/* ===== HOVER BOTONES ===== */
-.stButton > button:hover {
-    transform: translateY(-2px);
-    background: linear-gradient(
-        135deg,
-        #1d4ed8,
-        #2563eb
-    );
+/* ===== HOVER ===== */
+.stButton > button:hover{
+    transform:translateY(-3px);
+    box-shadow:0px 12px 35px rgba(37,99,235,0.55);
 }
 
-/* ===== TARJETAS ===== */
-.card {
-    background: #dbe4ee;
-    color: #111827 !important;
-    padding: 30px;
-    border-radius: 22px;
-    border-left: 8px solid #2563eb;
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
-    margin-bottom: 20px;
-    transition: 0.3s;
+/* ===== CARDS ===== */
+.card{
+    background: rgba(15,23,42,0.72);
+    border:1px solid rgba(255,255,255,0.06);
+    backdrop-filter:blur(20px);
+    border-radius:28px;
+    padding:35px;
+    box-shadow:0px 15px 40px rgba(0,0,0,0.35);
+    transition:0.3s;
 }
 
-.card p {
-    color: #1e293b !important;
-    font-size: 18px;
+.card:hover{
+    transform:translateY(-5px);
 }
 
-.card h2 {
-    color: #0f172a !important;
-
+.card h2{
+    color:white!important;
+    font-size:44px;
+    margin-bottom:20px;
 }
 
-/* ===== EFECTO HOVER ===== */
-.card:hover {
-    transform: translateY(-5px);
+.card b,
+.card{
+    color:#cbd5e1!important;
+    font-size:18px;
+}
+
+/* ===== METRICS ===== */
+[data-testid="metric-container"]{
+    background: rgba(255,255,255,0.04);
+    border:1px solid rgba(255,255,255,0.06);
+    padding:28px;
+    border-radius:24px;
+    backdrop-filter:blur(18px);
+    box-shadow:0px 10px 35px rgba(0,0,0,0.28);
 }
 
 /* ===== DATAFRAMES ===== */
-[data-testid="stDataFrame"] {
-    border-radius: 18px;
-    overflow: hidden;
-    border: 1px solid #1e293b;
+[data-testid="stDataFrame"]{
+    border-radius:24px;
+    overflow:hidden;
+    border:1px solid rgba(255,255,255,0.06);
 }
 
-/* ===== ALERTAS ===== */
-.stAlert {
-    border-radius: 16px;
+/* ===== ALERTS ===== */
+.stAlert{
+    border-radius:20px;
 }
 
-/* ===== MÉTRICAS ===== */
-[data-testid="metric-container"] {
-    background: rgba(255,255,255,0.06);
-    border: 1px solid rgba(255,255,255,0.08);
-    padding: 20px;
-    border-radius: 18px;
-    box-shadow: 0px 4px 20px rgba(0,0,0,0.2);
+/* ===== IMAGENES ===== */
+img{
+    border-radius:24px;
 }
 
-/* ===== SCROLLBAR ===== */
-::-webkit-scrollbar {
-    width: 10px;
+/* ===== SCROLL ===== */
+::-webkit-scrollbar{
+    width:10px;
 }
 
-::-webkit-scrollbar-track {
-    background: #111827;
+::-webkit-scrollbar-thumb{
+    background:#2563eb;
+    border-radius:20px;
 }
 
-::-webkit-scrollbar-thumb {
-    background: #2563eb;
-    border-radius: 10px;
-}
-
-/* ===== QR ===== */
-img {
-    border-radius: 18px;
-}
-
-/* ===== SEPARADORES ===== */
-hr {
-    border: none;
-    height: 1px;
-    background: #334155;
+::-webkit-scrollbar-track{
+    background:#0f172a;
 }
 
 /* ===== ANIMACIÓN ===== */
-.block-container {
-    animation: fadeIn 0.5s ease-in-out;
+.block-container{
+    animation:fadeIn 0.5s ease-in-out;
 }
 
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+@keyframes fadeIn{
+    from{
+        opacity:0;
+        transform:translateY(12px);
     }
-    to {
-        opacity: 1;
-        transform: translateY(0px);
+    to{
+        opacity:1;
+        transform:translateY(0px);
     }
 }
 
@@ -188,13 +167,86 @@ hr {
 
 # 1.1 Titulo de la interfaz: 
 st.markdown("""
-<h1 style='text-align: center; color:#2563eb;'>
-Sistema Inteligente de Inventario Médico
+<div style="
+padding:35px;
+border-radius:28px;
+background: linear-gradient(
+135deg,
+rgba(37,99,235,0.18),
+rgba(15,23,42,0.85)
+);
+border:1px solid rgba(255,255,255,0.08);
+backdrop-filter: blur(18px);
+margin-bottom:30px;
+box-shadow: 0px 10px 40px rgba(0,0,0,0.35);
+">
+
+<h1 style="
+margin-bottom:5px;
+font-size:55px;
+font-weight:800;
+color:white;
+">
+🩺 MediTrack
 </h1>
-<p style='text-align:center; color:gray;'>
-Gestión • Mantenimiento • Trazabilidad • QR
+
+<p style="
+font-size:22px;
+color:#93c5fd;
+margin-bottom:18px;
+">
+Plataforma Inteligente de Gestión Biomédica
 </p>
-<hr>
+
+<div style="
+display:flex;
+gap:12px;
+flex-wrap:wrap;
+">
+
+<div style="
+background:rgba(255,255,255,0.06);
+padding:10px 18px;
+border-radius:14px;
+color:#cbd5e1;
+font-size:15px;
+">
+📦 Inventario
+</div>
+
+<div style="
+background:rgba(255,255,255,0.06);
+padding:10px 18px;
+border-radius:14px;
+color:#cbd5e1;
+font-size:15px;
+">
+🔧 Mantenimientos
+</div>
+
+<div style="
+background:rgba(255,255,255,0.06);
+padding:10px 18px;
+border-radius:14px;
+color:#cbd5e1;
+font-size:15px;
+">
+📱 QR Inteligente
+</div>
+
+<div style="
+background:rgba(255,255,255,0.06);
+padding:10px 18px;
+border-radius:14px;
+color:#cbd5e1;
+font-size:15px;
+">
+☁️ Cloud Access
+</div>
+
+</div>
+
+</div>
 """, unsafe_allow_html=True)
 
 
@@ -272,19 +324,22 @@ opcion = st.sidebar.selectbox(
 if opcion == "Inicio":
 
     st.markdown("""
-    <h1 style='margin-bottom:0px;'>
-    ¡Bienvenido al sistema!
-    </h1>
+<div class="card">
 
-    <p style='
-    color:#94a3b8;
-    font-size:18px;
-    margin-top:5px;
-    margin-bottom:30px;
-    '>
-    Despliega el menú lateral izquierdo para acceder a las funciones del sistema.
-    </p>
-    """, unsafe_allow_html=True)
+<h1 style="margin-bottom:8px;">
+👋 Bienvenido a MediTrack
+</h1>
+
+<p style="
+font-size:20px;
+color:#94a3b8;
+">
+Sistema avanzado para gestión biomédica hospitalaria.
+Administra inventario, mantenimientos y trazabilidad QR desde cualquier dispositivo.
+</p>
+
+</div>
+""", unsafe_allow_html=True)
 
     col1, col2, col3 = st.columns(3)
 
