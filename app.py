@@ -300,6 +300,42 @@ df.columns = [limpiar(col) for col in df.columns]
 #   2.2 Eliminar columnas duplicadas: 
 df = df.loc[:, ~df.columns.duplicated()]
 
+st.sidebar.markdown("""
+<div style='
+text-align:center;
+padding:25px 10px;
+margin-bottom:20px;
+background:rgba(255,255,255,0.04);
+border-radius:22px;
+border:1px solid rgba(255,255,255,0.06);
+'>
+
+<h1 style='
+margin-bottom:0px;
+font-size:36px;
+'>
+🩺
+</h1>
+
+<h2 style='
+margin-top:8px;
+margin-bottom:5px;
+font-size:24px;
+'>
+VitaCore
+</h2>
+
+<p style='
+font-size:14px;
+color:#94a3b8;
+'>
+Gestión Biomédica Inteligente
+</p>
+
+</div>
+""", unsafe_allow_html=True)
+
+st.sidebar.markdown("---")
 
 #   3. Creación de menú desplegable: 
 opcion = st.sidebar.selectbox(
@@ -318,6 +354,29 @@ opcion = st.sidebar.selectbox(
         "Salir"
     ]
 )
+
+
+# ===== ALERTAS DE MANTENIMIENTO =====
+from datetime import datetime
+
+hoy = datetime.now().date()
+
+equipos_vencidos = 0
+
+if os.path.exists("MANTENIMIENTOS.csv"):
+
+    df_alertas = pd.read_csv("MANTENIMIENTOS.csv")
+
+    df_alertas.columns = [limpiar(col) for col in df_alertas.columns]
+
+    if "proximo mantenimiento" in df_alertas.columns:
+
+        fechas = pd.to_datetime(
+            df_alertas["proximo mantenimiento"],
+            errors="coerce"
+        ).dt.date
+
+        equipos_vencidos = (fechas < hoy).sum()
 
 
 #   4. Despliegue de interfaz: 
@@ -341,7 +400,7 @@ Administra inventario, mantenimientos y trazabilidad QR desde cualquier disposit
 </div>
 """, unsafe_allow_html=True)
 
-    col1, col2, col3 = st.columns(3)
+    col1, col2, col3, col4 = st.columns(4)
 
     with col1:
         st.metric("📋 Equipos registrados", len(df))
@@ -351,8 +410,14 @@ Administra inventario, mantenimientos y trazabilidad QR desde cualquier disposit
 
     with col3:
         st.metric("🔧 Mantenimientos", 
-        len(pd.read_csv("MANTENIMIENTOS.csv")) if os.path.exists("MANTENIMIENTOS.csv") else 0)
-
+        len(pd.read_csv("MANTENIMIENTOS.csv")) if os.path.exists("MANTENIMIENTOS.csv") else 0) 
+        
+        with col4: 
+            st.metric(
+        "⚠️ Pendientes",
+        equipos_vencidos
+    )
+        
     st.markdown("---")
 
     st.info("""
@@ -540,7 +605,7 @@ elif opcion == "🔧 Registrar Mantenimiento":
             st.rerun()
 
 
-# 4.7 Identificación visual de equipos
+
 # 4.7 Identificación visual de equipos
 elif opcion == "📸 Identificación de Equipos":
 
@@ -569,10 +634,22 @@ elif opcion == "📸 Identificación de Equipos":
 
         if ruta_img:
             st.image(ruta_img, use_container_width=True)
+
         else:
             st.warning("No hay imagen disponible")
 
     with col2:
+
+        estado = datos['estado del equipo']
+
+        if estado == "Operativo":
+            color_estado = "#22c55e"
+
+        elif estado == "Mantenimiento":
+            color_estado = "#facc15"
+
+        else:
+            color_estado = "#ef4444"
 
         st.markdown(f"""
         <div class="card">
@@ -583,7 +660,16 @@ elif opcion == "📸 Identificación de Equipos":
         <b>Área:</b> {datos['area']} <br>
         <b>Marca:</b> {datos['marca']} <br>
         <b>Modelo:</b> {datos['modelo']} <br>
-        <b>Estado:</b> {datos['estado del equipo']}
+
+        <p>
+        <b>Estado:</b>
+        <span style="
+        color:{color_estado};
+        font-weight:bold;
+        ">
+        ● {estado}
+        </span>
+        </p>
 
         </div>
         """, unsafe_allow_html=True)
@@ -624,7 +710,7 @@ elif opcion == "📱 QR por Equipo":
             st.warning("QR no encontrado")
 
     with col2:
-
+        
         st.markdown(f"""
         <div class="card">
 
