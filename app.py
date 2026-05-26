@@ -95,15 +95,24 @@ div[data-baseweb="select"] > div {
 
 /* ===== TARJETAS ===== */
 .card {
-    background: #cbd5e1;
-    color: #111827;
+    background: #dbe4ee;
+    color: #111827 !important;
     padding: 30px;
     border-radius: 22px;
-    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
-    backdrop-filter: blur(10px);
     border-left: 8px solid #2563eb;
+    box-shadow: 0px 10px 30px rgba(0,0,0,0.25);
     margin-bottom: 20px;
     transition: 0.3s;
+}
+
+.card p {
+    color: #1e293b !important;
+    font-size: 18px;
+}
+
+.card h2 {
+    color: #0f172a !important;
+
 }
 
 /* ===== EFECTO HOVER ===== */
