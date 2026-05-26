@@ -187,7 +187,7 @@ font-size:55px;
 font-weight:800;
 color:white;
 ">
-🩺 MediTrack
+🩺 VitaCore
 </h1>
 
 <p style="
@@ -327,7 +327,7 @@ if opcion == "Inicio":
 <div class="card">
 
 <h1 style="margin-bottom:8px;">
-👋 Bienvenido a MediTrack
+¡Bienvenido a VitaCore!
 </h1>
 
 <p style="
@@ -607,7 +607,7 @@ elif opcion == "📱 QR por Equipo":
 
     with col1:
 
-        if ruta_img:
+        if os.path.exists(ruta_qr):
 
             st.image(ruta_qr, width=300)
 
