@@ -366,6 +366,8 @@ df.columns = [limpiar(col) for col in df.columns]
 #   2.2 Eliminar columnas duplicadas: 
 df = df.loc[:, ~df.columns.duplicated()]
 
+st.sidebar.image("logo.png", width=75)
+
 st.sidebar.markdown("""
 <div style='
 text-align:center;
@@ -375,13 +377,6 @@ background:rgba(255,255,255,0.04);
 border-radius:22px;
 border:1px solid rgba(255,255,255,0.06);
 '>
-
-<h1 style='
-margin-bottom:0px;
-font-size:36px;
-'>
-🩺
-</h1>
 
 <h2 style='
 margin-top:8px;
